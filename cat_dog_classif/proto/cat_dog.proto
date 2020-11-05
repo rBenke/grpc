@@ -35,8 +35,6 @@ message AnimalResponse {
 message ImageRequest {
     uint32 width = 1;
     uint32 height = 2;
-    bytes red_data = 3;
-    bytes green_data = 4;
-    bytes blue_data = 5;
+    bytes image_data = 3;
 }
 

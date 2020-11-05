@@ -15,7 +15,9 @@
 
 from concurrent import futures
 import logging
-
+from PIL import Image
+import numpy as np
+import cv2
 import grpc
 import sys
 sys.path.append("../proto_output")
@@ -26,8 +28,14 @@ import cat_dog_pb2
 
 class Animal_classif(cat_dog_pb2_grpc.Animal_classifServicer):
 
-    def ImageRequest(self, request, context):
-        return cat_dog_pb2.AnimalResponse(message= "cat")
+    def cat_or_dog(self, request, context):
+        request.image_data
+        image = Image.frombytes('RGB', (request.width, request.height), request.image_data, 'raw')
+        open_cv_image = np.array(image)
+
+        cv2.imshow("cos", open_cv_image)
+        cv2.waitKey()
+        return cat_dog_pb2.AnimalResponse(animal = "cat")
 
 
 def serve():

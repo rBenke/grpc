@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'B\013CatDogProtoP\001\242\002\003HLW',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\rcat_dog.proto\x12\x07\x63\x61t_dog\" \n\x0e\x41nimalResponse\x12\x0e\n\x06\x61nimal\x18\x01 \x01(\t\"f\n\x0cImageRequest\x12\r\n\x05width\x18\x01 \x01(\r\x12\x0e\n\x06height\x18\x02 \x01(\r\x12\x10\n\x08red_data\x18\x03 \x01(\x0c\x12\x12\n\ngreen_data\x18\x04 \x01(\x0c\x12\x11\n\tblue_data\x18\x05 \x01(\x0c\x32P\n\x0e\x41nimal_classif\x12>\n\ncat_or_dog\x12\x15.cat_dog.ImageRequest\x1a\x17.cat_dog.AnimalResponse\"\x00\x42\x15\x42\x0b\x43\x61tDogProtoP\x01\xa2\x02\x03HLWb\x06proto3'
+  serialized_pb=b'\n\rcat_dog.proto\x12\x07\x63\x61t_dog\" \n\x0e\x41nimalResponse\x12\x0e\n\x06\x61nimal\x18\x01 \x01(\t\"A\n\x0cImageRequest\x12\r\n\x05width\x18\x01 \x01(\r\x12\x0e\n\x06height\x18\x02 \x01(\r\x12\x12\n\nimage_data\x18\x03 \x01(\x0c\x32P\n\x0e\x41nimal_classif\x12>\n\ncat_or_dog\x12\x15.cat_dog.ImageRequest\x1a\x17.cat_dog.AnimalResponse\"\x00\x42\x15\x42\x0b\x43\x61tDogProtoP\x01\xa2\x02\x03HLWb\x06proto3'
 )
 
 
@@ -80,22 +80,8 @@ _IMAGEREQUEST = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='red_data', full_name='cat_dog.ImageRequest.red_data', index=2,
+      name='image_data', full_name='cat_dog.ImageRequest.image_data', index=2,
       number=3, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='green_data', full_name='cat_dog.ImageRequest.green_data', index=3,
-      number=4, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='blue_data', full_name='cat_dog.ImageRequest.blue_data', index=4,
-      number=5, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=b"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -113,7 +99,7 @@ _IMAGEREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=60,
-  serialized_end=162,
+  serialized_end=125,
 )
 
 DESCRIPTOR.message_types_by_name['AnimalResponse'] = _ANIMALRESPONSE
@@ -144,8 +130,8 @@ _ANIMAL_CLASSIF = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=164,
-  serialized_end=244,
+  serialized_start=127,
+  serialized_end=207,
   methods=[
   _descriptor.MethodDescriptor(
     name='cat_or_dog',
