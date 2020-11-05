@@ -16,26 +16,32 @@
 from concurrent import futures
 import logging
 from PIL import Image
+import tensorflow as tf
 import numpy as np
-import cv2
 import grpc
 import sys
 sys.path.append("../proto_output")
 import cat_dog_pb2_grpc
 import cat_dog_pb2
 
-
+model_path = "./../model/cats_vs_dogs_cnn"
 
 class Animal_classif(cat_dog_pb2_grpc.Animal_classifServicer):
+    def __init__(self):
+        self.model = tf.keras.models.load_model(model_path)
+
 
     def cat_or_dog(self, request, context):
-        request.image_data
         image = Image.frombytes('RGB', (request.width, request.height), request.image_data, 'raw')
-        open_cv_image = np.array(image)
+        image = np.array(image)/255
+        open_cv_image = tf.image.resize(image, size=(150, 150))
+        prediction = self.model.predict(np.expand_dims(open_cv_image, 0))[0][0]
 
-        cv2.imshow("cos", open_cv_image)
-        cv2.waitKey()
-        return cat_dog_pb2.AnimalResponse(animal = "cat")
+        animal = "dog"
+        if prediction>0.5:
+            animal = 'cat'
+
+        return cat_dog_pb2.AnimalResponse(animal = animal)
 
 
 def serve():
