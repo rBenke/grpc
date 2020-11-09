@@ -28,13 +28,16 @@ import cat_dog_pb2_grpc
 
 def run():
     img = cv2.imread("./../data/bed-1284238_640.jpg")
-    img_bytes = img.tobytes()
+    img_red_bytes = img[:,:,2].tobytes()
+    img_green_bytes = img[:,:,1].tobytes()
+    img_blue_bytes = img[:,:,0].tobytes()
     width = img.shape[1]
     height = img.shape[0]
 
     with grpc.insecure_channel('localhost:50051') as channel:
         stub = cat_dog_pb2_grpc.Animal_classifStub(channel)
-        response = stub.cat_or_dog(cat_dog_pb2.ImageRequest(width=width, height=height, image_data=img_bytes))
+        response = stub.cat_or_dog(cat_dog_pb2.ImageRequest(width=width, height=height, image_red=img_red_bytes,
+                                                            image_green=img_green_bytes, image_blue=img_blue_bytes))
     print("Response: " + response.animal)
 
 

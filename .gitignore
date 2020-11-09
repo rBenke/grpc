@@ -2,4 +2,8 @@
 **/model/
 **/.ipynb_checkpoints/
 **/__pycache__/
-.Rproj.user
+**/.Rproj.user
+**/.RData
+**/.Rhistory
+**/grpc.Rproj
+

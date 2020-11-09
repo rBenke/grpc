@@ -1,18 +1,3 @@
-# Copyright 2015 gRPC authors.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-"""The Python implementation of the GRPC helloworld.Greeter server."""
-
 from concurrent import futures
 import logging
 from PIL import Image
@@ -32,8 +17,11 @@ class Animal_classif(cat_dog_pb2_grpc.Animal_classifServicer):
 
 
     def cat_or_dog(self, request, context):
-        image = Image.frombytes('RGB', (request.width, request.height), request.image_data, 'raw')
-        image = np.array(image)/255
+        image_red = np.array(Image.frombytes('L', (request.width, request.height), request.image_red, 'raw'))
+        image_green = np.array(Image.frombytes('L', (request.width, request.height), request.image_green, 'raw'))
+        image_blue = np.array(Image.frombytes('L', (request.width, request.height), request.image_blue, 'raw'))
+        image = np.dstack((image_blue,image_green,image_red))/255
+              
         open_cv_image = tf.image.resize(image, size=(150, 150))
         prediction = self.model.predict(np.expand_dims(open_cv_image, 0))[0][0]
 
